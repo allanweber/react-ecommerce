@@ -10,6 +10,7 @@ import ShopPage from "./pages/shop/shop.component";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selector";
+import CheckoutPage from "./pages/checkout/checkout.component";
 
 class App extends Component {
   unsubscribeFromAuth = null;
@@ -46,6 +47,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
+          <Route path="/checkout" component={CheckoutPage} />
           <Route exact path="/signin" render={this.redirectIfSignedIn} />
         </Switch>
       </div>
