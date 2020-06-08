@@ -3,6 +3,15 @@ import { connect } from "react-redux";
 import { addItem } from "../../redux/cart/cart.actions";
 import CustomButton from "../custom-button/custom-button.component";
 import "./collection-item.styles.scss";
+import styled from "styled-components";
+
+const ButtonInCollection = styled(CustomButton)`
+  width: 80%;
+  opacity: 0.85;
+  position: absolute;
+  top: 225px;
+  /* display: none; */
+`;
 
 const CollectionItem = ({ item, addItemFunc }) => {
   const { name, price, imageUrl } = item;
@@ -18,9 +27,9 @@ const CollectionItem = ({ item, addItemFunc }) => {
         <span className="name">{name}</span>
         <span className="price">{price}</span>
       </div>
-      <CustomButton onClick={() => addItemFunc(item)} inverted>
+      <ButtonInCollection onClick={() => addItemFunc(item)} inverted>
         ADD TO CART
-      </CustomButton>
+      </ButtonInCollection>
     </div>
   );
 };
