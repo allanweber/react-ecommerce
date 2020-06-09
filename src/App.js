@@ -4,20 +4,23 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import "./App.css";
 import Header from "./components/header/header.component";
-import { auth, createUSerProfileDocument } from "./firebase/firebase.utils";
+import {
+  auth,
+  createUSerProfileDocument,
+} from "./firebase/firebase.utils";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.component";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selector";
 import CheckoutPage from "./pages/checkout/checkout.component";
+import { selectShopCollections } from "./redux/shop/shop.selector";
 
 class App extends Component {
   unsubscribeFromAuth = null;
   componentDidMount() {
+    const { setCurrentUserLocal } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      const { setCurrentUserLocal } = this.props;
-
       if (userAuth) {
         const userRef = await createUSerProfileDocument(userAuth);
         userRef.onSnapshot((snapShot) => {
@@ -30,6 +33,13 @@ class App extends Component {
         setCurrentUserLocal(null);
       }
     });
+
+    //const collectionArray = Object.keys(collections).map(key => collections[key]);
+
+    // addCollectionsAndItems(
+    //   "collections",
+    //   collectionArray.map(({ title, items }) => ({ title, items }))
+    // );
   }
 
   componentWillUnmount() {
@@ -57,6 +67,7 @@ class App extends Component {
 
 const mapStateProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  collections: selectShopCollections,
 });
 
 const mapDispatchToProps = (dispatch) => ({
