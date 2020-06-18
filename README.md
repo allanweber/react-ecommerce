@@ -11,3 +11,9 @@ https://git.heroku.com/react-ecommerce-allan.git
 Remove buildpacks:
 `heroku buildpacks`
 `heroku buildpacks:remove http://github.com/mars/create-react-app-buildpack.git`
+
+Push to Heroku
+`git push heroku master`
+
+Config Heroku env variable
+`heroku config:set STRIPE_SECRET_KEY=...`
